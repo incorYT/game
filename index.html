@@ -19,7 +19,7 @@
       border-radius: 10px;
       text-align: center;
     }
-    #fileBox {
+    #openBox {
       margin-top: 20px;
       padding: 15px;
       background: #333;
@@ -33,12 +33,12 @@
 
   <div class="box">
     <input type="file" id="fileInput">
-    <div id="fileBox">Open Imported File</div>
+    <div id="openBox">Open Imported File</div>
   </div>
 
   <script>
     const fileInput = document.getElementById("fileInput");
-    const fileBox = document.getElementById("fileBox");
+    const openBox = document.getElementById("openBox");
     let fileURL = null;
 
     fileInput.addEventListener("change", () => {
@@ -46,10 +46,11 @@
       if (!file) return;
 
       fileURL = URL.createObjectURL(file);
-      fileBox.style.display = "block";
+      openBox.style.display = "block";
+      openBox.textContent = "Open " + file.name;
     });
 
-    fileBox.addEventListener("click", () => {
+    openBox.addEventListener("click", () => {
       if (fileURL) {
         window.open(fileURL, "_blank");
       }
