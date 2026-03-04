@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Importer</title>
+  <title>Eaglercraft Launcher</title>
   <style>
     body {
       background: black;
@@ -19,7 +19,7 @@
       border-radius: 10px;
       text-align: center;
     }
-    #openBox {
+    #launchBox {
       margin-top: 20px;
       padding: 15px;
       background: #333;
@@ -32,13 +32,13 @@
 <body>
 
   <div class="box">
-    <input type="file" id="fileInput">
-    <div id="openBox">Open Imported File</div>
+    <input type="file" id="fileInput" accept=".html">
+    <div id="launchBox">Launch Eaglercraft Client</div>
   </div>
 
   <script>
     const fileInput = document.getElementById("fileInput");
-    const openBox = document.getElementById("openBox");
+    const launchBox = document.getElementById("launchBox");
     let fileURL = null;
 
     fileInput.addEventListener("change", () => {
@@ -46,11 +46,11 @@
       if (!file) return;
 
       fileURL = URL.createObjectURL(file);
-      openBox.style.display = "block";
-      openBox.textContent = "Open " + file.name;
+      launchBox.style.display = "block";
+      launchBox.textContent = "Launch " + file.name;
     });
 
-    openBox.addEventListener("click", () => {
+    launchBox.addEventListener("click", () => {
       if (fileURL) {
         window.open(fileURL, "_blank");
       }
