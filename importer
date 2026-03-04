@@ -1,44 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>File Import</title>
-    <style>
-        body {
-            background: black;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-        }
-
-        .upload-box {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(255,255,255,0.1);
-        }
-
-        label {
-            color: white;
-            font-size: 18px;
-        }
-
-        input[type="file"] {
-            margin-top: 15px;
-            color: white;
-        }
-    </style>
+  <title>Importer</title>
+  <style>
+    body {
+      background: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .box {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    #openBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="upload-box">
-        <label>Select a file to import:</label><br>
-        <input type="file">
-    </div>
+  <div class="box">
+    <input type="file" id="fileInput">
+    <button id="openBtn">Open File</button>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById("fileInput");
+    const openBtn = document.getElementById("openBtn");
+    let fileURL = null;
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      // Create a temporary URL for the file
+      fileURL = URL.createObjectURL(file);
+
+      // Show the open button
+      openBtn.style.display = "inline-block";
+    });
+
+    openBtn.addEventListener("click", () => {
+      if (fileURL) {
+        window.open(fileURL, "_blank");
+      }
+    });
+  </script>
 
 </body>
 </html>
