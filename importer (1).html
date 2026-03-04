@@ -4,26 +4,58 @@
   <title>Importer</title>
   <style>
     body {
-      background-color: black;
+      background: black;
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      color: white;
       font-family: Arial, sans-serif;
     }
     .box {
-      background-color: #222;
+      background: #222;
       padding: 20px;
       border-radius: 10px;
       text-align: center;
     }
+    #openBox {
+      margin-top: 20px;
+      padding: 15px;
+      background: #333;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+    }
   </style>
 </head>
 <body>
+
   <div class="box">
-    <input type="file">
+    <input type="file" id="fileInput">
+    <div id="openBox">Open Imported File</div>
   </div>
+
+  <script>
+    const fileInput = document.getElementById("fileInput");
+    const openBox = document.getElementById("openBox");
+    let fileURL = null;
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      fileURL = URL.createObjectURL(file);
+      openBox.style.display = "block";
+      openBox.textContent = "Open " + file.name;
+    });
+
+    openBox.addEventListener("click", () => {
+      if (fileURL) {
+        window.open(fileURL, "_blank");
+      }
+    });
+  </script>
+
 </body>
 </html>
